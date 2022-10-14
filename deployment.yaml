@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: df
+    labels:
+      app: df
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: df
+    template:
+        metadata:
+            labels:
+                app: df
+        spec:
+            volumes:
+                - name: df-cl
+                  hostPath:
+                    path: /disk1/DF
+            containers:
+                - name: df
+                  image: benlubar/dwarffortress
+                  tty: true
+                  stdin: true
